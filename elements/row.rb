@@ -25,7 +25,7 @@ class Row < ElementBase
   # @param [Object<BaseElement>] parent
   # @param [NilClass] content
   # @param [Hash] properties
-  def initialize(content = nil, parent: nil, **properties)
+  def initialize(content = nil, parent: nil, **properties, &block)
     @cols_counter = 0
 
     super

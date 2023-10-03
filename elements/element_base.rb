@@ -35,7 +35,7 @@ class ElementBase
   #
   # @param [String, Numeric, NilClass] content
   # @param [Hash] properties
-  def initialize(content = nil, parent: nil, **properties)
+  def initialize(content = nil, parent: nil, **properties, &block)
     raise ElementTagNotDefinedError unless tag
 
     @children   = []
@@ -43,7 +43,9 @@ class ElementBase
     @parent     = parent
 
     init_properties(**properties)
-    yield(self) if block_given?
+
+    instance_eval(&block) if block_given?
+
     do_after
   end
 

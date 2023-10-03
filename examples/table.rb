@@ -2,30 +2,30 @@
 
 require_relative '../elements/table'
 
-table = Table.new(border: 1, cellpadding: 8, cellspacing: 2, rows: 2, cols: 3, width: '100%') do |t|
-  t.header do |h|
-    h.cell 'Col A', class: 'first'
-    h.cell 'Col B'
-    h.cell 'Col C'
+table = Table.new(border: 1, cellpadding: 8, cellspacing: 2, rows: 2, cols: 3, width: '100%') do
+  header do
+    cell 'Col A', class: 'first'
+    cell 'Col B'
+    cell 'Col C'
   end
-  t.row(style: 'background: blue') do |r|
-    r.cell 'Cell 1-1'
-    r.cell 'Cell 1-2'
-    r.cell 'Cell 1-3'
+  row(style: 'background: white') do
+    cell 'Cell 1-1'
+    cell 'Cell 1-2'
+    cell 'Cell 1-3', style: 'background: yellow'
   end
-  t.row do |r|
-    r.properties.append style: 'background: yellow'
-    r.cell do |c|
-      c.add Table.new(border: 1) do |t1|
-        t1.row do |r1|
-          r1.properties.append class: 'innerData', style: 'background: yellow, color: blue'
-          r1.cell 'Inner Cell 2-1'
-          r1.cell 'Inner Cell 2-2'
+  row do
+    properties.append style: 'background: gray'
+    cell do
+      table(border: 1) do
+        row do
+          properties.append class: 'innerData'
+          cell 'Inner Cell 2-1', style: 'color: blue'
+          cell 'Inner Cell 2-2', style: 'color: yellow'
         end
       end
     end
-    r.cell '2-2', class: 'mid'
-    r.cell '2-3', class: 'last'
+    cell '2-2', class: 'mid'
+    cell '2-3', class: 'last', style: 'background: blue'
   end
 end
 

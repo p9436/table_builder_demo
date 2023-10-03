@@ -13,7 +13,15 @@ class Table < ElementBase
   attr_accessor :rows, :rows_counter, # Number of rows in table
                 :cols                 # Number of cols in table
 
-  def initialize(content = nil, parent: nil, **properties)
+  # Add a row to the table.
+  #
+  # @param [Hash] properties
+  # @param [Proc] block
+  def self.create(content = nil, parent: nil, **properties, &block)
+    parent.add Table.new(content, parent:, **properties, &block)
+  end
+
+  def initialize(content = nil, parent: nil, **properties, &block)
     @rows_counter = 0
     super
   end
